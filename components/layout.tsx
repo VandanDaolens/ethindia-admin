@@ -17,9 +17,6 @@ const Layout = ({ children }: Props) => {
   useEffect(() => {
     if (address) getUserInfo()
   }, [address, getUserInfo])
-  useEffect(() => {
-    console.log(userInfo)
-  }, [userInfo])
   return (
     <div className="flex w-screen h-screen">
       <div className="h-sceen w-64 flex flex-col">
@@ -55,7 +52,7 @@ const Layout = ({ children }: Props) => {
           </div>
         )}
       </div>
-      <div className='w-full'>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   )
 }

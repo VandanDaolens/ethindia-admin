@@ -3,16 +3,15 @@ export type QuestType = {
   title: string
   subTitle?: string
   questions: QuestionType[]
+  imageName: string
   // TODO: upload paop type?
-  startDate: string
-  endDate: string
 }
 
 export type QuestionType = {
   id: string
   question: string
   type: 'mcq' | 'single-choice'
-  options: MCQOptionType[]
+  options?: MCQOptionType[]
 }
 
 export type MCQOptionType = {

@@ -34,7 +34,7 @@ const MCQBlock = ({ options, setOptions, type }: MCQBlockProps) => {
     document.getElementById(options[index]?.id)?.querySelector('input')?.focus()
 
   useEffect(() => {
-    if (options) return
+    if (options.length !== 0) return
     setOptions([
       { text: '', id: nanoid() },
       { text: '', id: nanoid() },
@@ -49,7 +49,7 @@ const MCQBlock = ({ options, setOptions, type }: MCQBlockProps) => {
   }, [options?.length])
 
   return (
-    <div className="flex flex-col border p-5 rounded-xl items-start gap-3 bg-gray-100">
+    <div className="flex flex-col items-start gap-3">
       <div className="flex flex-col gap-3 w-full">
         {options?.map((option, index) => (
           <div
@@ -83,7 +83,7 @@ const MCQBlock = ({ options, setOptions, type }: MCQBlockProps) => {
                 onClick={() => onDeleteOption(option.id)}
                 className="opacity-75"
               >
-                <XMarkIcon />
+                <XMarkIcon className="w-5" />
               </button>
             )}
           </div>
@@ -91,9 +91,9 @@ const MCQBlock = ({ options, setOptions, type }: MCQBlockProps) => {
       </div>
       <button
         onClick={onAddNewOption}
-        className="text-blue-500 hover:underline"
+        className="text-purple-600 hover:underline"
       >
-        + Add Another Option
+        + Add option
       </button>
     </div>
   )

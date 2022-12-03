@@ -58,7 +58,6 @@ export const Web3AuthProvider = ({ children }: any) => {
 
   // if wallet already connected close widget
   useEffect(() => {
-    console.log('hidelwallet')
     if (socialLoginSDK && socialLoginSDK.provider) {
       socialLoginSDK.hideWallet()
     }
