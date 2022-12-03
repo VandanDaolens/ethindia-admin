@@ -18,3 +18,12 @@ export type MCQOptionType = {
   text: string
   id: string
 }
+
+export type QuestResponseType = {
+  userAddress: string
+  quest: QuestType
+  responses: {
+    questionId: string
+    options: string[]
+  }[]
+}

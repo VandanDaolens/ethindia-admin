@@ -22,8 +22,8 @@ const QuestionCard = ({
   }
   return (
     <div className="flex flex-col border p-3 rounded-xl gap-3">
-      <div className="flex justify-between">
-        <div className="flex gap-1 items-center">
+      <div className="flex gap-1">
+        <div className="flex gap-1 items-center flex-grow">
           <p className="text-gray-500">{index + 1}. </p>
           <input
             placeholder="Type question"
@@ -31,7 +31,7 @@ const QuestionCard = ({
             onChange={(e) =>
               modifyQuestion({ question: e.currentTarget.value })
             }
-            className="outline-none"
+            className="outline-none w-full"
           />
         </div>
         <div className="flex justify-center gap-2">
@@ -49,10 +49,7 @@ const QuestionCard = ({
       <MCQBlock
         key={question.id}
         options={question.options || []}
-        setOptions={(options) => {
-          console.log({ options })
-          modifyQuestion({ options })
-        }}
+        setOptions={(options) => modifyQuestion({ options })}
         type={question.type}
       />
     </div>

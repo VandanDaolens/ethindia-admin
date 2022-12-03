@@ -18,7 +18,7 @@ type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const customStyles = {
+export const customStyles = {
   content: {
     top: '50%',
     left: '50%',
