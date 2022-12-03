@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@alch/alchemy-web3": "^1.4.7",
     "@biconomy/core-types": "^0.0.4",
     "@biconomy/smart-account": "^0.0.4",
     "@biconomy/web3-auth": "^0.0.4",
