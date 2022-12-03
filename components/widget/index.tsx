@@ -12,8 +12,10 @@ const Widget = ({ quest }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <div className="w-full">
-      <h1>🎖 Win a POAP taking up an easy quiz 🎖 </h1>
+    <div className="w-full flex flex-col justify-center items-center gap-4 border rounded-xl p-14 shadow">
+      <h1 className="text-3xl font-bold">
+        🎖 Win a POAP taking up an easy quiz 🎖
+      </h1>
 
       <button
         onClick={() => setIsModalOpen(true)}

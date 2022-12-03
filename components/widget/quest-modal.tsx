@@ -3,9 +3,12 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useWeb3AuthContext } from '../../contexts/social-login-context'
 import { QuestResponseType, QuestType } from '../../lib/types'
+import { getScorePercent } from '../../lib/utils'
 import { customStyles } from '../add-quest-modal'
 import ConnectWallet from './connect-wallet'
+import Fail from './fail'
 import Quiz from './quiz'
+import Success from './success'
 
 type Props = {
   quest: QuestType
@@ -28,6 +31,7 @@ const QuestModal = ({ quest, isOpen, setIsOpen }: Props) => {
     responses: [],
     userAddress: address,
   })
+  const [scorePercent, setScorePercent] = useState(0)
 
   useEffect(() => {
     if (!address) return
@@ -36,7 +40,7 @@ const QuestModal = ({ quest, isOpen, setIsOpen }: Props) => {
 
   return (
     <ReactModal isOpen={isOpen} style={customStyles}>
-      <div className="relative">
+      <div className="relative w-[600px] h-[463px]">
         <button
           className="absolute top-0 right-0"
           onClick={() => setIsOpen(false)}
@@ -48,7 +52,23 @@ const QuestModal = ({ quest, isOpen, setIsOpen }: Props) => {
           <ConnectWallet handleNextStep={() => setActiveStep(STEPS.quiz)} />
         )}
         {activeStep === STEPS.quiz && (
-          <Quiz response={response} setResponse={setResponse} />
+          <Quiz
+            response={response}
+            setResponse={setResponse}
+            handleNextStep={() => {
+              const score = getScorePercent(response)
+              setScorePercent(score)
+              if (score >= 70) setActiveStep(STEPS.success)
+              else setActiveStep(STEPS.fail)
+            }}
+          />
+        )}
+        {activeStep === STEPS.fail && <Success score={scorePercent} />}
+        {activeStep === STEPS.success && (
+          <Fail
+            score={scorePercent}
+            onTryAgain={() => setActiveStep(STEPS.quiz)}
+          />
         )}
       </div>
     </ReactModal>

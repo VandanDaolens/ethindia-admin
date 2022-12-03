@@ -1,5 +1,6 @@
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/solid'
+import classNames from 'classnames'
 import { useState } from 'react'
 import { MCQOptionType } from '../../lib/types'
 
@@ -13,11 +14,14 @@ export const Options = ({ options, setOptions, type }: Props) => {
   const [selected, setSelected] = useState<string[]>([])
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-3">
       {options.map((option) => (
         <button
           key={option.id}
-          className="flex"
+          className={classNames(
+            'flex border rounded-lg items-center gap-2 p-3',
+            { 'bg-purple-100 border-purple-600': selected.includes(option.id) }
+          )}
           onClick={() =>
             setSelected((prev) =>
               type !== 'mcq'

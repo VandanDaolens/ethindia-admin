@@ -17,6 +17,7 @@ export type QuestionType = {
 export type MCQOptionType = {
   text: string
   id: string
+  isCorrect?: boolean
 }
 
 export type QuestResponseType = {

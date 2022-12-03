@@ -28,15 +28,15 @@ const Quiz = ({ response, setResponse, handleNextStep }: Props) => {
   }
 
   return (
-    <div className="flex flex-col">
-      <p className="bg-yellow-50 text-yellow-500">
+    <div className="flex flex-col w-full h-full gap-2">
+      <p className="bg-yellow-50 text-yellow-500 rounded-lg p-2 w-fit">
         🎖 Win a POAP by scoring more than 70%
       </p>
-      <p>
+      <p className='text-xs text-gray-500'>
         {activeQuestion + 1} of {response?.quest?.questions.length}
       </p>
-      <h2>{question?.question}</h2>
-      <div>
+      <h2 className='text-xl font-bold'>{question?.question}</h2>
+      <div className="flex-grow overflow-auto">
         <Options
           options={question.options || []}
           setOptions={(options) =>
@@ -45,7 +45,12 @@ const Quiz = ({ response, setResponse, handleNextStep }: Props) => {
           type={question.type}
         />
       </div>
-      <button onClick={handleNext}>Next</button>
+      <button
+        onClick={handleNext}
+        className="bg-purple-600 hover:opacity-70 text-white rounded-md py-3 font-bold"
+      >
+        Next
+      </button>
     </div>
   )
 }

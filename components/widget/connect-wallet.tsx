@@ -11,10 +11,10 @@ const ConnectWallet = ({ handleNextStep }: Props) => {
     if (address) handleNextStep()
   }, [address])
   return (
-    <div className="flex flex-col">
-      <p className="flex-grow">🎖 Win a POAP taking up an easy quiz</p>
+    <div className="flex flex-col w-full h-full">
+      <p className="flex-grow flex justify-center items-center text-yellow-500 text-lg font-bold">🎖 Win a POAP taking up an easy quiz</p>
       <button
-        className="bg-purple-600 hover:opacity-70"
+        className="bg-purple-600 hover:opacity-70 text-white rounded-md py-3 font-bold"
         onClick={connect}
         disabled={!!address}
       >

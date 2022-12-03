@@ -22,6 +22,14 @@ const MCQBlock = ({ options, setOptions, type }: MCQBlockProps) => {
     setOptions(newOptions)
   }
 
+  const onOptionCorrectChange = (value: boolean, id: string) => {
+    const newOptions = [...options]
+    const index = newOptions.findIndex((option) => option.id === id)
+    if (index === -1) return
+    newOptions[index].isCorrect = value
+    setOptions(newOptions)
+  }
+
   const onDeleteOption = (id: string) => {
     const newOptions = [...options]
     const index = newOptions.findIndex((option) => option.id === id)
@@ -57,11 +65,15 @@ const MCQBlock = ({ options, setOptions, type }: MCQBlockProps) => {
             id={option.id}
             className="flex gap-2 items-center p-3 bg-white border rounded-xl"
           >
-            <div
-              className={classNames('p-2 border bg-white', {
-                'rounded-full': type === 'mcq',
-                rounded: type === 'single-choice',
+            <button
+              className={classNames('p-2 border', {
+                rounded: type === 'mcq',
+                'rounded-full': type === 'single-choice',
+                'bg-purple-600': option.isCorrect,
               })}
+              onClick={() =>
+                onOptionCorrectChange(!option?.isCorrect, option.id)
+              }
             />
             <input
               className="outline-none w-full"

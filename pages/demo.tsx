@@ -4,7 +4,7 @@ import { DUMMY_QUEST_DATA } from '../lib/constants'
 
 const Demo = () => {
   return (
-    <div>
+    <div className="p-10">
       <Widget quest={DUMMY_QUEST_DATA} />
     </div>
   )
