@@ -29,31 +29,33 @@ const Layout = ({ children }: Props) => {
           height={140}
           alt="sidebar bg"
         />
-        <div className="flex flex-col">
+        <div className="flex flex-col p-3">
           <Link
             href={ROUTES.root}
-            className={classNames('p-2 border', {
-              'bg-gray-200': router.pathname === ROUTES.root,
+            className={classNames('p-2 rounded-lg', {
+              'bg-gray-100 font-semibold': router.pathname === ROUTES.root,
             })}
           >
             Quests
           </Link>
           <Link
             href={ROUTES.insights}
-            className={classNames('p-2 border', {
-              'bg-gray-200': router.pathname === ROUTES.insights,
+            className={classNames('p-2 rounded-lg', {
+              'bg-gray-100 font-semibold': router.pathname === ROUTES.insights,
             })}
           >
             Insights
           </Link>
         </div>
         {userInfo && (
-          <div className="mt-auto">
-            <span>{userInfo?.name || address}</span>{' '}
+          <div className="mt-auto p-2 font-bold">
+            <span className="text-purple-600 text-xl">
+              {userInfo?.name || address}
+            </span>{' '}
           </div>
         )}
       </div>
-      <div>{children}</div>
+      <div className='w-full'>{children}</div>
     </div>
   )
 }
