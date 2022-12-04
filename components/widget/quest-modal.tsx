@@ -56,6 +56,7 @@ const QuestModal = ({ quest, isOpen, setIsOpen }: Props) => {
             response={response}
             setResponse={setResponse}
             handleNextStep={() => {
+              console.log({ response })
               const score = getScorePercent(response)
               setScorePercent(score)
               if (score >= 70) setActiveStep(STEPS.success)

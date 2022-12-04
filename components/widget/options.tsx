@@ -1,7 +1,7 @@
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/solid'
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MCQOptionType } from '../../lib/types'
 
 type Props = {
@@ -12,6 +12,10 @@ type Props = {
 
 export const Options = ({ options, setOptions, type }: Props) => {
   const [selected, setSelected] = useState<string[]>([])
+
+  useEffect(() => {
+    setOptions(selected)
+  }, [selected])
 
   return (
     <div className="flex flex-col gap-3">
@@ -35,6 +39,7 @@ export const Options = ({ options, setOptions, type }: Props) => {
           <input
             type={type === 'mcq' ? 'checkbox' : 'radio'}
             checked={selected.includes(option.id)}
+            readOnly
           />
           {option.text}
         </button>

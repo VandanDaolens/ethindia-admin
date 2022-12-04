@@ -5,10 +5,15 @@ const ConnectWalletBtn = () => {
   const { address, loading, connect, disconnect } = useWeb3AuthContext()
   return (
     <button
+      disabled={loading}
       onClick={!address ? connect : disconnect}
       className="px-3 py-3 bg-purple-600 hover:opacity-70 text-white rounded-xl"
     >
-      {!address ? 'Connect wallet' : 'Disconnect wallet'}{' '}
+      {loading ? (
+        'Connecting...'
+      ) : (
+        <>{!address ? 'Connect wallet' : 'Disconnect wallet'} </>
+      )}
     </button>
   )
 }

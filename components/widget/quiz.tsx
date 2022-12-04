@@ -17,7 +17,11 @@ const Quiz = ({ response, setResponse, handleNextStep }: Props) => {
     const responses = [...response?.responses]
     if (!responses) return
     const index = responses.findIndex((res) => res.questionId === questionId)
-    responses[index].options = options
+    if (index === -1) {
+      responses.push({ questionId, options })
+    } else {
+      responses[index].options = options
+    }
     setResponse((prev) => ({ ...prev, responses }))
   }
 
@@ -32,10 +36,10 @@ const Quiz = ({ response, setResponse, handleNextStep }: Props) => {
       <p className="bg-yellow-50 text-yellow-500 rounded-lg p-2 w-fit">
         🎖 Win a POAP by scoring more than 70%
       </p>
-      <p className='text-xs text-gray-500'>
+      <p className="text-xs text-gray-500">
         {activeQuestion + 1} of {response?.quest?.questions.length}
       </p>
-      <h2 className='text-xl font-bold'>{question?.question}</h2>
+      <h2 className="text-xl font-bold">{question?.question}</h2>
       <div className="flex-grow overflow-auto">
         <Options
           options={question.options || []}

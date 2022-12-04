@@ -20,7 +20,7 @@ export const DUMMY_CARD_DATA: QuestType[] = [
         type: 'mcq',
       },
     ],
-    imageName: '',
+    imageUrl: '',
   },
   {
     id: '3',
@@ -35,7 +35,7 @@ export const DUMMY_CARD_DATA: QuestType[] = [
         type: 'mcq',
       },
     ],
-    imageName: '',
+    imageUrl: '',
   },
   {
     id: '2',
@@ -50,7 +50,7 @@ export const DUMMY_CARD_DATA: QuestType[] = [
         type: 'mcq',
       },
     ],
-    imageName: '',
+    imageUrl: '',
   },
   {
     id: '1',
@@ -65,7 +65,7 @@ export const DUMMY_CARD_DATA: QuestType[] = [
         type: 'mcq',
       },
     ],
-    imageName: '',
+    imageUrl: '',
   },
 ]
 
@@ -80,6 +80,7 @@ export const DUMMY_QUEST_DATA: QuestType = {
         {
           text: 'Bad',
           id: 'dDgOIdA3fbRYLSQhTCO-e',
+          isCorrect: true,
         },
         {
           text: 'Ok',
@@ -103,6 +104,7 @@ export const DUMMY_QUEST_DATA: QuestType = {
         {
           text: 'No',
           id: 'oxNNg2kV4a9yih-pp7xZ7',
+          isCorrect: true,
         },
       ],
     },
@@ -114,10 +116,12 @@ export const DUMMY_QUEST_DATA: QuestType = {
         {
           text: 'Talk 1',
           id: 'zMjJ1wNaN5qUFeDiXO4m_',
+          isCorrect: true,
         },
         {
           text: 'Talk 2',
           id: 'vbYOwkQIbfr3CY-wWr1iX',
+          isCorrect: true,
         },
         {
           text: 'Talk 3',
@@ -128,7 +132,7 @@ export const DUMMY_QUEST_DATA: QuestType = {
   ],
   title: 'Time to quiz',
   subTitle: 'optional description?',
-  imageName: '6z72ja.jpg',
+  imageUrl: '6z72ja.jpg',
 }
 
 export const DEFAULT_QUESTION_DATA: QuestionType = {

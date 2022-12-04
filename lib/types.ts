@@ -3,7 +3,7 @@ export type QuestType = {
   title: string
   subTitle?: string
   questions: QuestionType[]
-  imageName: string
+  imageUrl: string
   // TODO: upload paop type?
 }
 
@@ -27,4 +27,10 @@ export type QuestResponseType = {
     questionId: string
     options: string[]
   }[]
+}
+
+export type IPFSResType = {
+  nftMetadata: string
+  questId: string
+  questUrl: string
 }

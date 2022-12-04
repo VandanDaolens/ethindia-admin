@@ -8,14 +8,22 @@ import React, {
   useState,
 } from 'react'
 import Modal from 'react-modal'
+import { useSmartAccountContext } from '../contexts/smart-account-context'
+import { useWeb3AuthContext } from '../contexts/social-login-context'
 import { DEFAULT_QUESTION_DATA } from '../lib/constants'
 import { QuestionType, QuestType } from '../lib/types'
-import { getDefaultQuestionData } from '../lib/utils'
+import {
+  getDefaultQuestionData,
+  saveToQuestSmartContract,
+  uploadNftMetadataToIpfs,
+  uploadToIpfs,
+} from '../lib/utils'
 import QuestionCard from './question-card'
 
 type Props = {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
+  addQuest: any
 }
 
 export const customStyles = {
@@ -34,11 +42,14 @@ export const customStyles = {
   },
 }
 
-const AddQuestModal = ({ isOpen, setIsOpen }: Props) => {
+const AddQuestModal = ({ isOpen, setIsOpen, addQuest }: Props) => {
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [questions, setQuestions] = useState<QuestionType[]>([])
+  const [isSaving, setIsSaving] = useState(false)
+
+  const { wallet } = useSmartAccountContext()
 
   const updateQuestionById = (questionId: string, question: QuestionType) => {
     const updatedQuestions = [...questions]
@@ -62,16 +73,36 @@ const AddQuestModal = ({ isOpen, setIsOpen }: Props) => {
   }
 
   const onDone = async () => {
-    // TODO: complete
+    if (isSaving) return
+    setIsSaving(true)
     const quest: QuestType = {
       id: nanoid(),
       questions,
       title,
       subTitle,
-      imageName: imageInputRef?.current?.files?.[0]?.name || '',
+      imageUrl: imageInputRef?.current?.files?.[0]?.name || '',
     }
+    const imageFile = imageInputRef?.current?.files?.[0]
+    const imageUrlData = await uploadNftMetadataToIpfs(imageFile)
+    console.log({ imageUrlData })
+    quest.imageUrl = imageUrlData
 
-    console.log({ quest })
+    const data = await uploadToIpfs(quest)
+    await saveToQuestSmartContract(
+      data?.data?.path,
+      imageUrlData,
+      quest.id,
+      wallet as any,
+      () => {
+        addQuest(quest)
+        setIsSaving(false)
+        setIsOpen(false)
+      },
+      () => {
+        alert('Something went wrongs')
+        setIsSaving(false)
+      }
+    )
   }
 
   const imageInputRef = useRef<HTMLInputElement>(null)
@@ -145,9 +176,10 @@ const AddQuestModal = ({ isOpen, setIsOpen }: Props) => {
         <div className="mt-auto flex justify-between self-end">
           <button
             onClick={onDone}
+            disabled={isSaving}
             className="bg-purple-600 hover:opacity-70 text-white px-4 py-2 rounded-xl"
           >
-            Done
+            {isSaving ? 'Saving...' : 'Done'}
           </button>
         </div>
       </div>

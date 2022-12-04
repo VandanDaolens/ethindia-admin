@@ -5,20 +5,16 @@ import { QuestType } from '../lib/types'
 
 type Props = {
   card: QuestType
-  onClick: () => void
 }
 
-const QuestCard = ({ card, onClick }: Props) => {
+const QuestCard = ({ card }: Props) => {
   const { userInfo, address } = useWeb3AuthContext()
   // TODO: handle copy
   const onCopyCode = () => {
     console.log('HANDLE COPY')
   }
   return (
-    <div
-      className="flex flex-col w-60 h-48 rounded-2xl border bg-white p-5 gap-1 hover:border-purple-600 cursor-pointer"
-      onClick={onClick}
-    >
+    <div className="flex flex-col w-60 h-48 rounded-2xl border bg-white p-5 gap-1 hover:border-purple-600 cursor-pointer">
       <div className="flex text-purple-600 text-xs">
         {userInfo?.name || address}
       </div>
